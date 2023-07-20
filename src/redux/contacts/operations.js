@@ -11,12 +11,12 @@ export const fetchContacts = createAsyncThunk(
       const responce = await axios.get('/contacts');
       console.log(responce);
 
-      // if (!responce.data.length) {
-      //   throw new Error('There is no contacts in your phonebook');
-      // }
+      if (!responce.data.length) {
+        return rejectWithValue('There is no contacts in your phonebook');
+      }
       return responce.data;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -25,10 +25,10 @@ export const addContact = createAsyncThunk(
   'addContactStatus',
   async (contact, { rejectWithValue }) => {
     try {
-      const responce = await axios.post('/contacts', contact);
-      return responce.data;
+      const { data } = await axios.post('/contacts', contact);
+      return data;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -37,13 +37,13 @@ export const deleteContact = createAsyncThunk(
   'delContactStatus',
   async (id, { rejectWithValue }) => {
     try {
-      const responce = await axios.delete(`/contacts/${id}`, id);
+      const { data } = await axios.delete(`/contacts/${id}`, id);
       toast.success(
-        `Number with name "${responce.data.name}" was successfully deleted from your phonebook!`
+        `Number with name "${data.name}" was successfully deleted from your phonebook!`
       );
-      return responce.data.id;
+      return data.id;
     } catch (error) {
-      rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );

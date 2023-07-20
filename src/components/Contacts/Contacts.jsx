@@ -10,7 +10,7 @@ import css from './Contacts.module.css';
 
 export default function Contacts() {
   const dispatch = useDispatch();
-  useEffect(() => {
+  useEffect(() => {   
     dispatch(fetchContacts());
   }, [dispatch]);
 
@@ -19,7 +19,7 @@ export default function Contacts() {
   if (!filteredContactsList.length) {
     return;
   }
-  return (
+   return (
     <ul className={css.list}>
       {filteredContactsList.map(({ number, name, id }) => {
         return (

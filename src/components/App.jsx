@@ -1,46 +1,44 @@
-import { LineWave } from 'react-loader-spinner';
 import { useSelector, useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import { SharedLayout } from './SharedLayout/SharedLayout';
-import Contacts from './Contacts';
-import SearchBox from './SearchBox';
-import ContactForm from './ContactForm';
-import { selectIsLoading, selectError, selectToken } from 'redux/selectors';
-
-import 'react-toastify/dist/ReactToastify.css';
-import { Routes, Route } from 'react-router-dom';
+import { selectIsRefreshing } from 'redux/selectors';
 import { HomePage } from 'Pages/Home';
 import { ContactsPage } from 'Pages/ContactsPage';
 import AuthPage from 'Pages/Authorization';
 import { LogInPage } from 'Pages/Login';
 import { fetchCurrentUser } from 'redux/Authorization/operations';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
+import PublicRoute from './PublicRoute/PublicRote';
 
 export function App() {
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
   const dispatch = useDispatch();
-  const selectedToken = useSelector(selectToken);
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    if (!selectedToken) {
-      return;
-    }
-    dispatch(fetchCurrentUser(selectedToken));
-  }, [dispatch, selectedToken]);
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   return (
-    <Routes>
-      <Route path="/" element={<SharedLayout />}>
-        <Route index element={<HomePage />} />
-        <PrivateRoute path="contacts">
-          <ContactsPage />
-        </PrivateRoute>
-        <Route path="auth" element={<AuthPage />} />
-        <Route path="login" element={<LogInPage />} />
-      </Route>
-    </Routes>
+    !isRefreshing && (
+      <>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<HomePage />} />
+            <Route element={<PrivateRoute redirectTo="login" />}>
+              <Route path="contacts" element={<ContactsPage />} />
+            </Route>
+            <Route element={<PublicRoute redirectTo="/contacts" restricted />}>
+              <Route path="auth" element={<AuthPage />} />
+              <Route path="login" element={<LogInPage />} />
+            </Route>
+          </Route>
+        </Routes>
+        <ToastContainer autoClose={3000} />
+      </>
+    )
   );
 }

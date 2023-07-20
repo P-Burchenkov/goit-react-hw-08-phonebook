@@ -4,7 +4,6 @@ import {
   fetchContacts,
   addContact,
   deleteContact,
-  authUser,
 } from 'redux/contacts/operations';
 
 export const contactsSlice = createSlice({

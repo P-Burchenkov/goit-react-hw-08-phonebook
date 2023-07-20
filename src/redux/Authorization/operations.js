@@ -18,10 +18,10 @@ export const authUser = createAsyncThunk(
     try {
       const { data } = await axios.post('/users/signup', user);
       token.set(data.token);
-      console.log(data);
       return data;
     } catch (error) {
-      rejectWithValue(error.message);
+      console.log(error);
+      return rejectWithValue('Oops... Something went wrong!');
     }
   }
 );
@@ -34,7 +34,9 @@ export const logIn = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      rejectWithValue(error.message);
+      return rejectWithValue(
+        'Oops... Something went wrong! Enter correct"email" and "password", please'
+      );
     }
   }
 );
@@ -47,22 +49,28 @@ export const logOut = createAsyncThunk(
       console.log(responce);
       token.unSet();
     } catch (error) {
-      rejectWithValue(error.message);
+      return rejectWithValue(
+        'Oops, something went wrong((( Try again, please!'
+      );
     }
   }
 );
 
 export const fetchCurrentUser = createAsyncThunk(
   'refreshUser',
-  async (selectedToken, { rejectWithValue }) => {
-    token.set(selectedToken);
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState();
+    const persistedToken = state.user.token;
+    if (!persistedToken) {
+      return rejectWithValue();
+    }
+    token.set(persistedToken);
     try {
       const { data } = await axios.get('/users/current');
 
-      console.log(data);
       return data;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error);
     }
   }
 );

@@ -11,9 +11,10 @@ const initialState = {
     name: null,
     email: null,
   },
-
+  error: null,
   token: null,
   isLogedIn: false,
+  isRefreshing: false,
 };
 
 export const authSlice = createSlice({
@@ -26,12 +27,20 @@ export const authSlice = createSlice({
       state.user.email = action.payload.user.email;
       state.token = action.payload.token;
       state.isLogedIn = true;
+      state.error = null;
+    });
+    builder.addCase(authUser.rejected, (state, action) => {
+      state.error = action.payload;
     });
     builder.addCase(logIn.fulfilled, (state, action) => {
       state.user.name = action.payload.user.name;
       state.user.email = action.payload.user.email;
       state.token = action.payload.token;
       state.isLogedIn = true;
+      state.error = null;
+    });
+    builder.addCase(logIn.rejected, (state, action) => {
+      state.error = action.payload;
     });
     builder.addCase(logOut.fulfilled, (state, action) => {
       state.user.name = null;
@@ -39,11 +48,20 @@ export const authSlice = createSlice({
       state.token = null;
       state.isLogedIn = false;
     });
+    builder.addCase(logOut.rejected, (state, action) => {
+      state.error = action.payload;
+    });
     builder.addCase(fetchCurrentUser.fulfilled, (state, action) => {
       state.user.name = action.payload.name;
       state.user.email = action.payload.email;
-      // state.token = action.payload.token;
       state.isLogedIn = true;
+      state.isRefreshing = false;
+    });
+    builder.addCase(fetchCurrentUser.pending, state => {
+      state.isRefreshing = true;
+    });
+    builder.addCase(fetchCurrentUser.rejected, state => {
+      state.isRefreshing = false;
     });
   },
 });
