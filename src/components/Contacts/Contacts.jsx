@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { selectFilteredContacts } from 'redux/selectors';
 import DeleteButton from 'components/DeleteButton';
-import { fetchContacts } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
 
 import css from './Contacts.module.css';
 

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import ValidateWarning from 'components/ValidateWarning';
 import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts/operations';
 
 import css from './ContactForm.module.css';
 
@@ -16,7 +16,6 @@ export default function ContactForm() {
   const initialValue = {
     name: '',
     number: '',
-    id: '',
   };
 
   const schema = object({

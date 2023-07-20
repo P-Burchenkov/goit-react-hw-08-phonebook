@@ -2,20 +2,21 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'https://64a6b3dc096b3f0fcc805e3f.mockapi.io';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const fetchContacts = createAsyncThunk(
   'fetchContactsStatus',
   async (_, { rejectWithValue }) => {
     try {
       const responce = await axios.get('/contacts');
+      console.log(responce);
 
-      if (!responce.data.length) {
-        throw new Error('There is no contacts in your phonebook');
-      }
+      // if (!responce.data.length) {
+      //   throw new Error('There is no contacts in your phonebook');
+      // }
       return responce.data;
     } catch (error) {
-      rejectWithValue(error.message);
+      rejectWithValue(error);
     }
   }
 );
@@ -27,7 +28,7 @@ export const addContact = createAsyncThunk(
       const responce = await axios.post('/contacts', contact);
       return responce.data;
     } catch (error) {
-      rejectWithValue(error.message);
+      rejectWithValue(error);
     }
   }
 );
