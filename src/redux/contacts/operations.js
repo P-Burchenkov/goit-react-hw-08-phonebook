@@ -9,7 +9,6 @@ export const fetchContacts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const responce = await axios.get('/contacts');
-      console.log(responce);
 
       if (!responce.data.length) {
         return rejectWithValue('There is no contacts in your phonebook');

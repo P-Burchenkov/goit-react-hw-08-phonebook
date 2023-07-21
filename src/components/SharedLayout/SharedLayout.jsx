@@ -1,11 +1,11 @@
-import { AppBar } from 'components/AppBar/AppBar';
+import PrimarySearchAppBar from 'components/AppBar';
 import { Outlet } from 'react-router-dom';
 
-export function SharedLayout() {
+export default function SharedLayout() {
   return (
     <>
-      <AppBar />
-      <main>
+      <PrimarySearchAppBar />
+      <main className="container">
         <Outlet />
       </main>
     </>

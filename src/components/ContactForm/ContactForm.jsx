@@ -9,7 +9,7 @@ import { addContact } from 'redux/contacts/operations';
 
 import css from './ContactForm.module.css';
 
-export default function ContactForm() {
+export default function ContactForm({ closeModal }) {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
@@ -44,6 +44,7 @@ export default function ContactForm() {
       `Number ${data.number} was successfully added to you phonebook with name: "${data.name}"!`
     );
     dispatch(addContact(data));
+    closeModal();
 
     resetForm();
   };

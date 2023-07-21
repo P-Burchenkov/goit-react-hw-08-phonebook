@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
+import Button from '@mui/material/Button';
 import { deleteContact } from 'redux/contacts/operations';
-import css from './DeleteButton.module.css';
 
 export default function DeleteButton({ id }) {
   const dispatch = useDispatch();
@@ -11,12 +10,8 @@ export default function DeleteButton({ id }) {
   };
 
   return (
-    <button className={css.delButton} type="button" id={id} onClick={onDelete}>
+    <Button variant="contained" color="error" onClick={onDelete}>
       Delete
-    </button>
+    </Button>
   );
 }
-
-DeleteButton.propTypes = {
-  id: PropTypes.string.isRequired,
-};

@@ -1,0 +1,12 @@
+.nav {
+  display: flex;
+  gap: 16px;
+  margin-left: 48px;
+}
+
+.navLink {
+  text-decoration: underline;
+  &:hover {
+    color: black;
+  }
+}

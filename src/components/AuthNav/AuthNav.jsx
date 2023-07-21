@@ -1,10 +1,30 @@
 import { NavLink } from 'react-router-dom';
+import css from './Authnav.module.css';
+import Typography from '@mui/material/Typography';
 
-export function AuthNav() {
+export default function AuthNav() {
   return (
-    <>
-      <NavLink to="/login">Log in</NavLink>
-      <NavLink to="/auth">Authorization</NavLink>
-    </>
+    <nav className={css.nav}>
+      <NavLink className={css.NavLink} to="/login">
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ display: { xs: 'none', sm: 'block' } }}
+        >
+          Sign in
+        </Typography>
+      </NavLink>
+      <NavLink className={css.NavLink} to="/auth">
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ display: { xs: 'none', sm: 'block' } }}
+        >
+          Sign up
+        </Typography>
+      </NavLink>
+    </nav>
   );
 }

@@ -6,11 +6,11 @@ import { selectFilteredContacts } from 'redux/selectors';
 import DeleteButton from 'components/DeleteButton';
 import { fetchContacts } from 'redux/contacts/operations';
 
-import css from './Contacts.module.css';
+import css from './ContactsPage.module.css';
 
-export default function Contacts() {
+export default function ContactsPage() {
   const dispatch = useDispatch();
-  useEffect(() => {   
+  useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
@@ -19,7 +19,7 @@ export default function Contacts() {
   if (!filteredContactsList.length) {
     return;
   }
-   return (
+  return (
     <ul className={css.list}>
       {filteredContactsList.map(({ number, name, id }) => {
         return (
