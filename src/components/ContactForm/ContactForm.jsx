@@ -8,10 +8,12 @@ import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/contacts/operations';
 
 import css from './ContactForm.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function ContactForm({ closeModal }) {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const navigate = useNavigate();
 
   const initialValue = {
     name: '',
@@ -44,6 +46,7 @@ export default function ContactForm({ closeModal }) {
       `Number ${data.number} was successfully added to you phonebook with name: "${data.name}"!`
     );
     dispatch(addContact(data));
+    navigate('/contacts');
     closeModal();
 
     resetForm();

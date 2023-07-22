@@ -12,6 +12,7 @@ import AuthPage from 'Pages/Authorization';
 import LogInPage from 'Pages/Login';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRote';
+import HomePage from 'Pages/HomePage';
 
 export function App() {
   const dispatch = useDispatch();
@@ -24,17 +25,23 @@ export function App() {
   return (
     !isRefreshing && (
       <>
-        <Routes>
-          <Route path="/" element={<SharedLayout />}>
-            <Route element={<PrivateRoute redirectTo="login" />}>
-              <Route path="contacts" element={<ContactsPage />} />
+        <>
+          <Routes>
+            <Route path="/" element={<SharedLayout />}>
+              <Route index element={<HomePage />} />
+              <Route element={<PrivateRoute redirectTo="login" />}>
+                <Route path="contacts" element={<ContactsPage />} />
+              </Route>
+              <Route
+                element={<PublicRoute redirectTo="/contacts" restricted />}
+              >
+                <Route path="auth" element={<AuthPage />} />
+                <Route path="login" element={<LogInPage />} />
+              </Route>
             </Route>
-            <Route element={<PublicRoute redirectTo="/contacts" />}>
-              <Route path="auth" element={<AuthPage />} />
-              <Route path="login" element={<LogInPage />} />
-            </Route>
-          </Route>
-        </Routes>
+          </Routes>
+          <ToastContainer autoClose={3000} />
+        </>
         <ToastContainer autoClose={3000} />
       </>
     )

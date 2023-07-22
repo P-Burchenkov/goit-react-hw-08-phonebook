@@ -4,18 +4,16 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 
-import { selectIsLogedIn, selectUser } from 'redux/selectors';
-import LogOutButton from 'components/LogOutButton/LogOutButton';
+import { selectIsLogedIn } from 'redux/selectors';
 import OpenModalButton from 'components/OpenModalButton/OpenModalButton';
 import BasiModal from 'components/Modal/Modal';
 import Filter from 'components/SearchBox/SearchBox';
-import AuthNav from 'components/AuthNav';
+import SiteNavigation from 'components/SiteNavigation/SiteNavigation';
+import UserMenu from 'components/UserMenu/UserMenu';
 
 export default function PrimarySearchAppBar() {
   const isLogedIn = useSelector(selectIsLogedIn);
-  const userName = useSelector(selectUser);
   const [showModal, setShowModal] = useState(false);
 
   const handleOpen = () => setShowModal(true);
@@ -34,14 +32,8 @@ export default function PrimarySearchAppBar() {
           >
             Phonebook
           </Typography>
+          <SiteNavigation />
           {isLogedIn && <Filter />}
-          {!isLogedIn && (
-            <AuthNav
-              style={{
-                marginLeft: 48,
-              }}
-            />
-          )}
           <Box sx={{ flexGrow: 1 }}>
             {isLogedIn && <OpenModalButton handleOpen={handleOpen} />}
           </Box>
@@ -53,11 +45,7 @@ export default function PrimarySearchAppBar() {
               justifyContent: 'center',
             }}
           >
-            <Box>{isLogedIn && <LogOutButton />}</Box>
-            <Typography variant="h5">
-              {isLogedIn && ` Hello "${userName} "!!!  `}
-            </Typography>
-            <Box>{isLogedIn && <AccountCircle />}</Box>
+            {isLogedIn && <UserMenu />}
           </Box>
         </Toolbar>
       </AppBar>

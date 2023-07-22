@@ -49,8 +49,7 @@ export const logOut = createAsyncThunk(
   'logOutStatus',
   async (_, { rejectWithValue }) => {
     try {
-      const responce = await axios.post('/users/logout');
-      console.log(responce);
+      await axios.post('/users/logout');
       token.unSet();
     } catch (error) {
       toast.error('Oops, something went wrong((( Try again, please!');

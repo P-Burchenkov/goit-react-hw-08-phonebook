@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import { filterContacts } from 'redux/filter/filterSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -46,13 +47,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Filter() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSearch = e => {
     console.log(e.target.value);
     dispatch(filterContacts(e.target.value));
   };
   return (
-    <Search onChange={onSearch}>
+    <Search onChange={onSearch} onFocus={() => navigate('/contacts')}>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>

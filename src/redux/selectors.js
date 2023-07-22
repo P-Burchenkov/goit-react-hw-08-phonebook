@@ -25,3 +25,5 @@ export const selectIsLogedIn = state => state.user.isLogedIn;
 export const selectToken = state => state.user.token;
 
 export const selectIsRefreshing = state => state.user.isRefreshing;
+
+export const selectEmail = state => state.user.user.email;
