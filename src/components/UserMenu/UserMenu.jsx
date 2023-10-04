@@ -16,7 +16,7 @@ export default function UserMenu() {
       }}
     >
       <LogOutButton />
-      <Typography variant="h5" component="div">
+      <Typography variant="h6" component="div">
         {`${email}`}
       </Typography>
       <AccountCircle />

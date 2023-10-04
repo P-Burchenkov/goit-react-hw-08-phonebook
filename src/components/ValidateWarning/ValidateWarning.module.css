@@ -1,3 +1,7 @@
 .warning {
-    color: tomato;
+  position: absolute;
+  top: 72px;
+
+  color: tomato;
+  font-size: 12px;
 }

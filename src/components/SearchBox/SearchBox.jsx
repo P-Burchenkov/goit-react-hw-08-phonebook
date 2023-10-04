@@ -2,8 +2,9 @@ import { useDispatch } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-import { filterContacts } from 'redux/filter/filterSlice';
 import { useNavigate } from 'react-router-dom';
+
+import { filterContacts } from 'redux/filter/filterSlice';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -35,7 +36,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',

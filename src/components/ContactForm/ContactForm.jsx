@@ -1,14 +1,15 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { object, string, number } from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Button } from '@mui/material';
 
 import ValidateWarning from 'components/ValidateWarning';
 import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/contacts/operations';
 
 import css from './ContactForm.module.css';
-import { useNavigate } from 'react-router-dom';
 
 export default function ContactForm({ closeModal }) {
   const dispatch = useDispatch();
@@ -62,20 +63,24 @@ export default function ContactForm({ closeModal }) {
         <label className={css.label}>
           Name
           <Field
+            placeholder="Name"
+            className={css.field}
             type="text"
             name="name"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            title="Name may contain only letters, apostrophe, dash and spaces."
             required
           />
           <ErrorMessage
             name="name"
             component={ValidateWarning}
-            text="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            text="Name may contain only letters, apostrophe, dash and spaces."
           />
         </label>
         <label className={css.label}>
           Number
           <Field
+            placeholder="Phonenumber"
+            className={css.field}
             type="tel"
             name="number"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
@@ -87,9 +92,9 @@ export default function ContactForm({ closeModal }) {
             component={ValidateWarning}
           />
         </label>
-        <button type="submit" className={css.button}>
+        <Button type="submit" variant="contained">
           Add contact
-        </button>
+        </Button>
       </Form>
     </Formik>
   );

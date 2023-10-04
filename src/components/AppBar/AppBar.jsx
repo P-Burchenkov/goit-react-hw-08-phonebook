@@ -11,6 +11,7 @@ import BasiModal from 'components/Modal/Modal';
 import Filter from 'components/SearchBox/SearchBox';
 import SiteNavigation from 'components/SiteNavigation/SiteNavigation';
 import UserMenu from 'components/UserMenu/UserMenu';
+// import { AppBar, Toolbar, IconButton, MenuIcon } from '@mui/material';
 
 export default function PrimarySearchAppBar() {
   const isLogedIn = useSelector(selectIsLogedIn);
@@ -21,11 +22,25 @@ export default function PrimarySearchAppBar() {
   const handleClose = () => setShowModal(false);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    // <AppBar position="static">
+    //   <Toolbar>
+    //     <IconButton
+    //       size="large"
+    //       edge="start"
+    //       color="inherit"
+    //       aria-label="menu"
+    //       sx={{ mr: 2 }}
+    //     >
+    //       <MenuIcon />
+    //     </IconButton>
+    //   </Toolbar>
+    // </AppBar>
+
+    <>
       <AppBar position="static">
         <Toolbar>
           <Typography
-            variant="h5"
+            variant="h4"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
@@ -50,6 +65,6 @@ export default function PrimarySearchAppBar() {
         </Toolbar>
       </AppBar>
       {showModal && <BasiModal open={showModal} handleClose={handleClose} />}
-    </Box>
+    </>
   );
 }

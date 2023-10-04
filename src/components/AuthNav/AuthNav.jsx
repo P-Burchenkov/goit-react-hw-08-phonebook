@@ -9,7 +9,8 @@ export default function AuthNav() {
         <Typography
           variant="h6"
           noWrap
-          component="div"
+          component="span"
+          className="link"
           sx={{ display: { xs: 'none', sm: 'block' } }}
         >
           Sign in
@@ -19,7 +20,8 @@ export default function AuthNav() {
         <Typography
           variant="h6"
           noWrap
-          component="div"
+          component="span"
+          className="link"
           sx={{ display: { xs: 'none', sm: 'block' } }}
         >
           Sign up

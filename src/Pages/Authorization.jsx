@@ -1,15 +1,17 @@
-import * as React from 'react';
 import { NavLink } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Box,
+  Typography,
+  Container,
+  Grid,
+} from '@mui/material';
+
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useDispatch } from 'react-redux';
@@ -95,7 +97,15 @@ export default function LogInPage() {
             </Button>
             <Grid container>
               <Grid item>
-                <NavLink to="/login">Do you have an account? Sign In</NavLink>
+                <NavLink to="/login">
+                  <Typography
+                    sx={{
+                      color: '#1976D2',
+                    }}
+                  >
+                    Do you have an account? Sign In
+                  </Typography>
+                </NavLink>
               </Grid>
             </Grid>
           </Box>

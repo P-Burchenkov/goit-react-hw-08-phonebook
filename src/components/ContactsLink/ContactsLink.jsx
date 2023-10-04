@@ -10,6 +10,7 @@ export default function ContactsLink() {
         variant="h6"
         noWrap
         component="div"
+        className="link"
         sx={{ display: { xs: 'none', sm: 'block' } }}
       >
         Contacts

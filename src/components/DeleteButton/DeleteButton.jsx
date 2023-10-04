@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-import Button from '@mui/material/Button';
 import { deleteContact } from 'redux/contacts/operations';
 
 export default function DeleteButton({ id }) {
@@ -10,8 +11,8 @@ export default function DeleteButton({ id }) {
   };
 
   return (
-    <Button variant="contained" color="error" onClick={onDelete}>
-      Delete
-    </Button>
+    <IconButton aria-label="delete contact" onClick={onDelete}>
+      <DeleteIcon />
+    </IconButton>
   );
 }
