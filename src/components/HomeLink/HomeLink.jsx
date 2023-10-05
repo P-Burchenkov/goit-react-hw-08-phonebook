@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import css from './HomeLink.module.css';
 
 export default function HomeLink() {
   return (
